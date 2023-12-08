@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <h1 id="atten">Attendance Management</h1>
+    <!-- <h1 id="atten">Attendance Management</h1> -->
 
     <div id="main-div">
         <!-- <div id="email">
@@ -18,8 +18,8 @@
         <div class="student-name">
             <h3>Student Name</h3>
             <div class="f-l-name">
-                <input type="text" id="firstName" placeholder="firstName">
-                <input type="text" id="lastName" placeholder="lastName">
+                <input type="text" id="firstName" placeholder="First name" required>
+                <input type="text" id="lastName" placeholder="Last name" required>
             </div>
         </div>
 
@@ -56,16 +56,18 @@
             </div> -->
 
             <div class="my-status">
-                <input type="text"  id="status" placeholder="Enter Status"/>
+                <input type="text"  id="status" placeholder="Enter Status" required/>
             </div>
         </div>
 
         <hr class="profile-line">
 
         <button type="button" onclick="saveAttendance()">Record Attendance</button>
-        <button type="button" onclick="getData()">View Attendance</button>
-        <button>Delete Attendance</button>
-        <button>Update Attendance</button>
+        <a href="./attendanceList/index.html"><button type="button" >View Attendance</button></a>
+        <a href="./delete/index.html"><button>Delete Attendance</button></a>
+        <a href="./update/index.html"><button>Update Attendance</button></a>
+        <a id="attendance-btn" href="./attendanceLandingPage/index.html" type="button"><button>Go Back</button></a>
+
 
     
     </div>
@@ -100,60 +102,15 @@ fetch(backendUrl, {
 })
 .then(data => {
     console.log('Success:', data);
-    alert('Attendance and User saved successfully');
+    alert('Attendance recorded successfully');
 })
 .catch((error) => {
     console.error('Error:', error);
-    alert('Error saving attendance: ' + error.message);
+    alert('Error recording attendance: ' + error.message);
 });
 
 
         }
-
-function displayAttendance(data) {
-    const attendanceContainer = document.getElementById('attendance-container');
-
-    attendanceContainer.innerHTML = '';
-
-    data.forEach(attendance => {
-        const attendanceDiv = document.createElement('div');
-        attendanceDiv.classList.add('attendance-item'); 
-
-        const fullName = `${attendance.firstName} ${attendance.lastName}`;
-        const date = new Date(attendance.date).toLocaleDateString(); 
-
-        const status = document.createElement('p');
-        status.textContent = `Status: ${attendance.status}`;
-
-        const nameAndDate = document.createElement('p');
-        nameAndDate.textContent = `${fullName} - ${date}`;
-
-        attendanceDiv.appendChild(nameAndDate);
-        attendanceDiv.appendChild(status);
-
-        attendanceContainer.appendChild(attendanceDiv);
-    });
-}
-
-function getData() {
-    const backendUrl = "http://localhost:1990/attendance-management/users"; 
-
-    fetch(backendUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Data retrieved:', data);
-
-            displayAttendance(data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-}
 
 
     </script>

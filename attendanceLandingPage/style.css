@@ -55,6 +55,7 @@ body{
 
 #words{
     width: 250px;
+
 }
 
 #image{
@@ -83,6 +84,7 @@ body{
     line-height: 24px; 
     cursor: pointer;
     transition: 1.5s;
+    text-decoration: none;
 }
 
 #attendance-btn:hover{
